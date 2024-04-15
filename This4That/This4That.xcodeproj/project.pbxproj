@@ -17,6 +17,7 @@
 		7A068C212BCCDEAA00E6267A /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A068C202BCCDEAA00E6267A /* HomePageViewController.swift */; };
 		7A068C232BCCDF1F00E6267A /* ProductListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A068C222BCCDF1F00E6267A /* ProductListingViewController.swift */; };
 		7A068C252BCCE1BD00E6267A /* NearbyStoresViewContoroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A068C242BCCE1BD00E6267A /* NearbyStoresViewContoroller.swift */; };
+		7A068C272BCCE64600E6267A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A068C262BCCE64600E6267A /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		7A068C202BCCDEAA00E6267A /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		7A068C222BCCDF1F00E6267A /* ProductListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListingViewController.swift; sourceTree = "<group>"; };
 		7A068C242BCCE1BD00E6267A /* NearbyStoresViewContoroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyStoresViewContoroller.swift; sourceTree = "<group>"; };
+		7A068C262BCCE64600E6267A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +82,6 @@
 		7A068BE82BCCDB6800E6267A = {
 			isa = PBXGroup;
 			children = (
-				7A068C242BCCE1BD00E6267A /* NearbyStoresViewContoroller.swift */,
 				7A068BF32BCCDB6900E6267A /* This4That */,
 				7A068C042BCCDB6C00E6267A /* This4ThatTests */,
 				7A068C0E2BCCDB6C00E6267A /* This4ThatUITests */,
@@ -101,6 +102,8 @@
 		7A068BF32BCCDB6900E6267A /* This4That */ = {
 			isa = PBXGroup;
 			children = (
+				7A068C262BCCE64600E6267A /* AppDelegate.swift */,
+				7A068C242BCCE1BD00E6267A /* NearbyStoresViewContoroller.swift */,
 				7A068BF42BCCDB6900E6267A /* This4ThatApp.swift */,
 				7A068BF62BCCDB6900E6267A /* ContentView.swift */,
 				7A068C202BCCDEAA00E6267A /* HomePageViewController.swift */,
@@ -266,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A068C272BCCE64600E6267A /* AppDelegate.swift in Sources */,
 				7A068BF72BCCDB6900E6267A /* ContentView.swift in Sources */,
 				7A068BF52BCCDB6900E6267A /* This4ThatApp.swift in Sources */,
 				7A068C212BCCDEAA00E6267A /* HomePageViewController.swift in Sources */,

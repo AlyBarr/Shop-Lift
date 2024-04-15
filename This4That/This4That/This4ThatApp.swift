@@ -11,14 +11,22 @@ import MapKit
 import SwiftUI
 
 @main
-struct This4ThatApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
-}
+class This4ThatApp: UIResponder, UIApplicationDelegate {
 
+        var window: UIWindow?
+
+        func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+            window = UIWindow(frame: UIScreen.main.bounds)
+            
+            let contentViewController = ContentViewController() // Using UIKit's ContentViewController
+            let navigationController = UINavigationController(rootViewController: contentViewController)
+            
+            window?.rootViewController = navigationController
+            window?.makeKeyAndVisible()
+            
+            return true
+        }
+}
 
 // Example data model for a product
 struct Product {
@@ -42,7 +50,7 @@ class StoreManager: NSObject, CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let userLocation = locations.last else { return }
+        //guard let userLocation = locations.last else { return }
         // Use userLocation to find nearby stores
     }
 }

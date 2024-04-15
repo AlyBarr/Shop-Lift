@@ -7,7 +7,7 @@
 import UIKit
 import MapKit
 
-class NearbyStoresViewController: UIViewController, MKMapViewDelegate {
+class NearbyStoresViewContoroller: UIViewController, MKMapViewDelegate {
 
     let mapView = MKMapView()
 
