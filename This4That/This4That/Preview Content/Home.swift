@@ -14,84 +14,87 @@ struct Home: View{
 
     var body: some View{
         NavigationView{
-            VStack{
-                HStack{
-                    Text("Order From This4That")
-                        .font(.system(size: 35))
-                        .padding(.trailing)
+            ScrollView{
+                VStack{
                     
-                    Spacer()
-                    
-                    Image(systemName: "line.3.horizontal")
-                        .imageScale(.large)
-                        .padding()
-                        .frame(width: 70, height: 90)
-                        .overlay(RoundedRectangle(cornerRadius: 50).stroke().opacity(0.4))
-                }
-                
-                
-                .padding(30)
-                //Category List
-                CategoryListView
-                
-                //collection view
-                HStack{
-                    Text("Clothing Collections")
-                        .font(.system(size: 25))
-                    
-                    Spacer()
-                    NavigationLink{
-                        CollectionView()
-                    } label: {
-                        Image(systemName: "arrow.right")
-                            .imageScale(.large)
-                    }
-                    .foregroundColor(.black)
-                    
-                }
-                .padding(.horizontal, 30)
-                .padding(.vertical, 15)
-                
-                //product list
-                ScrollView(.horizontal, showsIndicators: false){
                     HStack{
-                        ForEach(productList, id: \.id) { item in
-                                ProductCard(product: item)
-                        }
+                        Text("Order From This4That")
+                            .font(.system(size: 35))
+                            .padding(.trailing)
                         
+                        Spacer()
+                        
+                        Image(systemName: "arrow.left")
+                            .imageScale(.large)
+                            .padding()
+                            .frame(width: 70, height: 90)
+                            .overlay(RoundedRectangle(cornerRadius: 50).stroke().opacity(0.4))
+                    }
+                    
+                    
+                    .padding(30)
+                    //Category List
+                    CategoryListView
+                    
+                    //collection view
+                    HStack{
+                        Text("Clothing Collections")
+                            .font(.system(size: 25))
+                        
+                        Spacer()
+                        NavigationLink{
+                            CollectionView()
+                        } label: {
+                            Image(systemName: "arrow.right")
+                                .imageScale(.large)
+                        }
+                        .foregroundColor(.black)
+                        
+                    }
+                    .padding(.horizontal, 30)
+                    .padding(.vertical, 15)
+                    
+                    //product list
+                    ScrollView(.horizontal, showsIndicators: false){
+                        HStack{
+                            ForEach(productList, id: \.id) { item in
+                                ProductCard(product: item)
+                            }
+                            
+                        }
                     }
                 }
             }
         }
     }
-    
-    //CategoryList View
-    var CategoryListView: some View{
-        HStack{
-            ScrollView(.horizontal, showsIndicators: false){
-                HStack {
-                    ForEach(categoryList, id: \.id) {item in
-                        Button {
-                            selectedCategory = item.title
-                        } label: {
-                            HStack{
-                                if item.title == "All" {
-                                    Image(item.icon)
-                                        .foregroundColor(selectedCategory == item.title ? .yellow : .black)
+        
+        //CategoryList View
+        var CategoryListView: some View{
+            HStack{
+                ScrollView(.horizontal, showsIndicators: false){
+                    HStack {
+                        ForEach(categoryList, id: \.id) {item in
+                            Button {
+                                selectedCategory = item.title
+                            } label: {
+                                HStack{
+                                    if item.title == "All" {
+                                        Image(item.icon)
+                                            .foregroundColor(selectedCategory == item.title ? .yellow : .black)
+                                    }
+                                    
+                                    Text(item.title)
                                 }
-                                
-                                Text(item.title)
-                            }
-                            .padding()
-                            .background(selectedCategory == item.title ? .black :
-                                    .gray.opacity(0.1))
-                            .foregroundColor(selectedCategory != item.title ? .black :
-                                    .white)
-                            .clipShape(Capsule())
+                                .padding()
+                                .background(selectedCategory == item.title ? .black :
+                                        .gray.opacity(0.1))
+                                .foregroundColor(selectedCategory != item.title ? .black :
+                                        .white)
+                                .clipShape(Capsule())
                         }
                     }
                 }
-                .padding(.horizontal, 30)
+                    .padding(.horizontal, 30)
             }
         }
     }

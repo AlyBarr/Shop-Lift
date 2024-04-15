@@ -18,6 +18,7 @@
 		7A068C2D2BCCEC9600E6267A /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A068C2C2BCCEC9600E6267A /* CategoryModel.swift */; };
 		7A068C302BCCF35900E6267A /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A068C2F2BCCF35900E6267A /* ProductModel.swift */; };
 		7A068C322BCCFC4300E6267A /* CollectionVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A068C312BCCFC4300E6267A /* CollectionVIew.swift */; };
+		7A9B67702BDE9B860045804F /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B676F2BDE9B860045804F /* CartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		7A068C2C2BCCEC9600E6267A /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		7A068C2F2BCCF35900E6267A /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		7A068C312BCCFC4300E6267A /* CollectionVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionVIew.swift; sourceTree = "<group>"; };
+		7A9B676F2BDE9B860045804F /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CartView.swift; path = ../../../../CartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 			children = (
 				7A068C2A2BCCEAAA00E6267A /* Home.swift */,
 				7A068C312BCCFC4300E6267A /* CollectionVIew.swift */,
+				7A9B676F2BDE9B860045804F /* CartView.swift */,
 				7A068BFB2BCCDB6B00E6267A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -278,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A068C322BCCFC4300E6267A /* CollectionVIew.swift in Sources */,
+				7A9B67702BDE9B860045804F /* CartView.swift in Sources */,
 				7A068BF72BCCDB6900E6267A /* ContentView.swift in Sources */,
 				7A068C2D2BCCEC9600E6267A /* CategoryModel.swift in Sources */,
 				7A068C2B2BCCEAAA00E6267A /* Home.swift in Sources */,
