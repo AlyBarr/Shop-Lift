@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CollectionView: View {
-    
+    @EnvironmentObject var cartManager: CartManager
     @Environment(\.presentationMode) var mode
     var body: some View {
         NavigationView{
@@ -40,6 +40,7 @@ struct CollectionView: View {
                               content: {
                         ForEach(productList, id: \.id) {item in
                             SmallProductCard(product: item)
+                                .environmentObject(cartManager)
                         }
                     })
                     .padding(.horizontal)
@@ -51,10 +52,13 @@ struct CollectionView: View {
 
 #Preview {
     CollectionView()
+        .environmentObject(CartManager())
 }
 
 struct SmallProductCard: View {
     var product: Product
+    
+    @EnvironmentObject var cartManager: CartManager
     
     var body: some View{
         ZStack{
@@ -85,7 +89,7 @@ struct SmallProductCard: View {
                         Spacer()
                         
                         Button {
-                            
+                            cartManager.addToCart(product: product)
                         } label: {
                             Image(systemName: "basket")
                                 .imageScale(.large)

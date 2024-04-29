@@ -11,6 +11,7 @@ struct Home: View{
 
     //Category View Properties
     @State var selectedCategory = "Clothes"
+    @EnvironmentObject var cartManager: CartManager
 
     var body: some View{
         NavigationView{
@@ -42,8 +43,10 @@ struct Home: View{
                             .font(.system(size: 25))
                         
                         Spacer()
+                        
                         NavigationLink{
                             CollectionView()
+                                .environmentObject(CartManager())
                         } label: {
                             Image(systemName: "arrow.right")
                                 .imageScale(.large)
@@ -59,6 +62,7 @@ struct Home: View{
                         HStack{
                             ForEach(productList, id: \.id) { item in
                                 ProductCard(product: item)
+                                    .environmentObject(cartManager)
                             }
                             
                         }
@@ -91,6 +95,7 @@ struct Home: View{
                                 .foregroundColor(selectedCategory != item.title ? .black :
                                         .white)
                                 .clipShape(Capsule())
+                            }
                         }
                     }
                 }
@@ -98,10 +103,11 @@ struct Home: View{
             }
         }
     }
-}
+
 
 #Preview {
     Home()
+        .environmentObject(CartManager())
 }
 
 
@@ -110,6 +116,7 @@ struct ProductCard: View {
     
     var product: Product
     
+    @EnvironmentObject var cartManager: CartManager
     
     var body: some View {
         ZStack{
@@ -139,7 +146,7 @@ struct ProductCard: View {
                         Spacer()
                         
                         Button {
-                            
+                            cartManager.addToCart(product: product)
                         } label: {
                             Image(systemName: "basket")
                                 .imageScale(.large)
@@ -149,6 +156,7 @@ struct ProductCard: View {
                                 .clipShape(Capsule())
                                 .foregroundColor(.white)
                         }
+                        .padding(.horizontal, -10)
                     }
                     .padding(.leading)
                     .padding()
