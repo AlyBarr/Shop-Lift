@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CollectionView: View {
+    var category: String
     @EnvironmentObject var cartManager: CartManager
     @Environment(\.presentationMode) var mode
     var body: some View {
@@ -39,8 +40,10 @@ struct CollectionView: View {
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())],
                               content: {
                         ForEach(productList, id: \.id) {item in
-                            SmallProductCard(product: item)
-                                .environmentObject(cartManager)
+                            if (item.category == category) {
+                                SmallProductCard(product: item)
+                                    .environmentObject(cartManager)
+                            }
                         }
                     })
                     .padding(.horizontal)
@@ -51,7 +54,7 @@ struct CollectionView: View {
 }
 
 #Preview {
-    CollectionView()
+    CollectionView(category: "All")
         .environmentObject(CartManager())
 }
 

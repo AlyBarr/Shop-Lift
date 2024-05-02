@@ -18,6 +18,9 @@ struct Product: Identifiable{
 }
 
 //sample product
+
+//Product(name: "", category: "", image: "", color: , price: ),
+
 var productList = [
     Product(name: "Shirt", category: "Clothes", image: "image 1", color: .yellow, price: 8),
     Product(name: "Hat", category: "Clothes", image: "image 2", color: .blue, price: 8),
@@ -30,4 +33,6 @@ var productList = [
     Product(name: "Underwear", category: "Clothes", image: "image 9", color: .orange, price: 8),
     Product(name: "Jacket", category: "Clothes", image: "image 10", color: .pink, price: 8),
     Product(name: "Sweater", category: "Clothes", image: "image 11", color: .purple, price: 8),
+    Product(name: "Hotdog", category: "Food", image: "", color: .black, price: 4),
+    Product(name: "Phone", category: "Electronics", image: "", color: .pink, price: 100),
 ]

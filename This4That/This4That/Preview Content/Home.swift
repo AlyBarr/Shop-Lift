@@ -7,102 +7,67 @@
 
 import SwiftUI
 
+
 struct Home: View{
 
     //Category View Properties
-    @State var selectedCategory = "Clothes"
+    @State var selectedCategory = "All"
     @EnvironmentObject var cartManager: CartManager
 
     var body: some View{
         NavigationView{
             ScrollView{
                 VStack{
-                    
                     HStack{
                         Text("Order From This4That")
                             .font(.system(size: 35))
                             .padding(.trailing)
-                        
+
                         Spacer()
-                        
+
                         Image(systemName: "arrow.left")
                             .imageScale(.large)
                             .padding()
                             .frame(width: 70, height: 90)
                             .overlay(RoundedRectangle(cornerRadius: 50).stroke().opacity(0.4))
                     }
-                    
-                    
                     .padding(30)
                     //Category List
-                    CategoryListView
-                    
-                    //collection view
                     HStack{
-                        Text("Clothing Collections")
-                            .font(.system(size: 25))
-                        
-                        Spacer()
-                        
-                        NavigationLink{
-                            CollectionView()
-                                .environmentObject(CartManager())
-                        } label: {
-                            Image(systemName: "arrow.right")
-                                .imageScale(.large)
-                        }
-                        .foregroundColor(.black)
-                        
-                    }
-                    .padding(.horizontal, 30)
-                    .padding(.vertical, 15)
-                    
-                    //product list
-                    ScrollView(.horizontal, showsIndicators: false){
-                        HStack{
-                            ForEach(productList, id: \.id) { item in
-                                ProductCard(product: item)
-                                    .environmentObject(cartManager)
-                            }
-                            
-                        }
-                    }
-                }
-            }
-        }
-    }
-        
-        //CategoryList View
-        var CategoryListView: some View{
-            HStack{
-                ScrollView(.horizontal, showsIndicators: false){
-                    HStack {
-                        ForEach(categoryList, id: \.id) {item in
-                            Button {
-                                selectedCategory = item.title
-                            } label: {
-                                HStack{
-                                    if item.title == "All" {
-                                        Image(item.icon)
-                                            .foregroundColor(selectedCategory == item.title ? .yellow : .black)
+                        ScrollView(.horizontal, showsIndicators: false){
+                            HStack {
+                                ForEach(categoryList, id: \.id) { item in
+                                    Button(action: {
+                                        selectedCategory = item.title
+                                    }) {
+                                        Text(item.title)
                                     }
-                                    
-                                    Text(item.title)
+                                        .padding()
+                                        .background(selectedCategory == item.title ? .black : .gray.opacity(0.1))
+                                        .foregroundColor(selectedCategory != item.title ? .black : .white)
+                                        .clipShape(Capsule())
                                 }
-                                .padding()
-                                .background(selectedCategory == item.title ? .black :
-                                        .gray.opacity(0.1))
-                                .foregroundColor(selectedCategory != item.title ? .black :
-                                        .white)
-                                .clipShape(Capsule())
                             }
                         }
+                        .padding(.horizontal, 30)
+                    }
+                    
+                    if (selectedCategory == "All") {
+                        Clothing()
+                        Food()
+                        Electronic()
+                    } else if (selectedCategory == "Clothing") {
+                        Clothing()
+                    } else if (selectedCategory == "Food") {
+                        Food()
+                    } else if (selectedCategory == "Electronics") {
+                        Electronic()
                     }
                 }
-                    .padding(.horizontal, 30)
             }
         }
     }
+}
 
 
 #Preview {
@@ -110,6 +75,110 @@ struct Home: View{
         .environmentObject(CartManager())
 }
 
+struct Clothing: View {
+    @EnvironmentObject var cartManager: CartManager
+    var body: some View {
+        HStack{
+            Text("Clothing Collections")
+                .font(.system(size: 25))
+
+            Spacer()
+
+            NavigationLink{
+                CollectionView(category: "Clothes")
+                    .environmentObject(CartManager())
+            } label: {
+                Image(systemName: "arrow.right")
+                    .imageScale(.large)
+            }
+            .foregroundColor(.black)
+
+        }
+        .padding(.horizontal, 30)
+        .padding(.vertical, 15)
+        ScrollView(.horizontal, showsIndicators: false){
+            HStack{
+                ForEach(productList, id: \.id) { item in
+                    if (item.category == "Clothes") {
+                        ProductCard(product: item)
+                            .environmentObject(cartManager)
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+struct Food: View {
+    @EnvironmentObject var cartManager: CartManager
+    var body: some View {
+        HStack{
+            Text("Food Collections")
+                .font(.system(size: 25))
+
+            Spacer()
+
+            NavigationLink{
+                CollectionView(category: "Food")
+                    .environmentObject(CartManager())
+            } label: {
+                Image(systemName: "arrow.right")
+                    .imageScale(.large)
+            }
+            .foregroundColor(.black)
+
+        }
+        .padding(.horizontal, 30)
+        .padding(.vertical, 15)
+        ScrollView(.horizontal, showsIndicators: false){
+            HStack{
+                ForEach(productList, id: \.id) { item in
+                    if (item.category == "Food") {
+                        ProductCard(product: item)
+                            .environmentObject(cartManager)
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+struct Electronic: View {
+    @EnvironmentObject var cartManager: CartManager
+    var body: some View {
+        HStack{
+            Text("Electronic Collections")
+                .font(.system(size: 25))
+
+            Spacer()
+
+            NavigationLink{
+                CollectionView(category: "Electronics")
+                    .environmentObject(CartManager())
+            } label: {
+                Image(systemName: "arrow.right")
+                    .imageScale(.large)
+            }
+            .foregroundColor(.black)
+
+        }
+        .padding(.horizontal, 30)
+        .padding(.vertical, 15)
+        ScrollView(.horizontal, showsIndicators: false){
+            HStack{
+                ForEach(productList, id: \.id) { item in
+                    if (item.category == "Electronics") {
+                        ProductCard(product: item)
+                            .environmentObject(cartManager)
+                    }
+                }
+
+            }
+        }
+    }
+}
 
 //product card view
 struct ProductCard: View {

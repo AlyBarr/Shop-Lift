@@ -31,7 +31,7 @@ struct ContentView: View {
                     }
                                   
                     Spacer()
-                    
+                    // after adding 6 products to cart, text is blocked. Adding more ruins ui
                     ForEach(cartManager.products, id: \.name){ product in
                         Image(product.image)
                             .resizable()
