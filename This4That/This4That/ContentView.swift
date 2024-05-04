@@ -35,6 +35,7 @@ struct ContentView: View {
                     ForEach(cartManager.products, id: \.name){ product in
                         Image(product.image)
                             .resizable()
+                            .scaledToFit()
                             .padding(8)
                             .frame(width:60, height: 60)
                             .background(.white)
@@ -43,11 +44,14 @@ struct ContentView: View {
                     }
                 }
                 .padding(30)
-                .frame(width: .infinity, height: 100)
+                .frame(width: .infinity, height: 120)
                 .background(.black)
+                .clipShape(.rect(topLeadingRadius: 60, topTrailingRadius: 60))
                 .foregroundColor(.white)
+                .edgesIgnoringSafeArea(.bottom)
             }
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
     
@@ -55,5 +59,4 @@ struct ContentView: View {
     ContentView()
     
     // Add actions for other buttons to navigate to different sections
-    
 }
