@@ -36,3 +36,14 @@ var productList = [
     Product(name: "Hotdog", category: "Food", image: "", color: .black, price: 4),
     Product(name: "Phone", category: "Electronics", image: "", color: .pink, price: 100),
 ]
+
+func removeProd(cart: inout [Product]) {
+    for i in (0...cart.count - 1) {
+        for j in (0...productList.count - 1) {
+            if (cart[i].id == productList[j].id) {
+                productList.remove(at: j)
+                return
+            }
+        }
+    }
+}

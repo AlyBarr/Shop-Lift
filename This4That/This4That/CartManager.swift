@@ -30,4 +30,11 @@ class CartManager: ObservableObject {
         return false
     }
     
+    func checkOut() {
+        for prod in products {
+            removeProd(cart: &products)
+        }
+        products.removeAll()
+    }
+    
 }

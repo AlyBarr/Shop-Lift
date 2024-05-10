@@ -85,7 +85,7 @@ struct CartView: View {
                     
                     // Buttons
                     Button {
-                        
+                        cartManager.checkOut()
                     } label : {
                         Text("Make Payment")
                             .frame(maxWidth: .infinity)
