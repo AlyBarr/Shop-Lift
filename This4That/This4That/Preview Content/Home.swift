@@ -12,7 +12,8 @@ struct Home: View{
 
     //Category View Properties
     @State var selectedCategory = "All"
-    @EnvironmentObject var cartManager: CartManager
+    //@EnvironmentObject var cartManager: CartManager
+    @StateObject var cartManager: CartManager
 
     var body: some View{
         NavigationView{
@@ -53,15 +54,15 @@ struct Home: View{
                     }
                     
                     if (selectedCategory == "All") {
-                        Clothing()
-                        Food()
-                        Electronic()
+                        Clothing(cartManager: cartManager)
+                        Food(cartManager: cartManager)
+                        Electronic(cartManager: cartManager)
                     } else if (selectedCategory == "Clothing") {
-                        Clothing()
+                        Clothing(cartManager: cartManager)
                     } else if (selectedCategory == "Food") {
-                        Food()
+                        Food(cartManager: cartManager)
                     } else if (selectedCategory == "Electronics") {
-                        Electronic()
+                        Electronic(cartManager: cartManager)
                     }
                 }
             }
@@ -71,12 +72,13 @@ struct Home: View{
 
 
 #Preview {
-    Home()
+    Home(cartManager: CartManager())
         .environmentObject(CartManager())
 }
 
 struct Clothing: View {
-    @EnvironmentObject var cartManager: CartManager
+    //@EnvironmentObject var cartManager: CartManager
+    @StateObject var cartManager: CartManager
     var body: some View {
         HStack{
             Text("Clothing Collections")
@@ -85,7 +87,7 @@ struct Clothing: View {
             Spacer()
 
             NavigationLink{
-                CollectionView(category: "Clothes")
+                CollectionView(category: "Clothes", cartManager: cartManager)
                     .environmentObject(CartManager())
             } label: {
                 Image(systemName: "arrow.right")
@@ -111,7 +113,8 @@ struct Clothing: View {
 }
 
 struct Food: View {
-    @EnvironmentObject var cartManager: CartManager
+    //@EnvironmentObject var cartManager: CartManager
+    @StateObject var cartManager: CartManager
     var body: some View {
         HStack{
             Text("Food Collections")
@@ -120,7 +123,7 @@ struct Food: View {
             Spacer()
 
             NavigationLink{
-                CollectionView(category: "Food")
+                CollectionView(category: "Food", cartManager: cartManager)
                     .environmentObject(CartManager())
             } label: {
                 Image(systemName: "arrow.right")
@@ -146,7 +149,8 @@ struct Food: View {
 }
 
 struct Electronic: View {
-    @EnvironmentObject var cartManager: CartManager
+    //@EnvironmentObject var cartManager: CartManager
+    @StateObject var cartManager: CartManager
     var body: some View {
         HStack{
             Text("Electronic Collections")
@@ -155,7 +159,7 @@ struct Electronic: View {
             Spacer()
 
             NavigationLink{
-                CollectionView(category: "Electronics")
+                CollectionView(category: "Electronics", cartManager: cartManager)
                     .environmentObject(CartManager())
             } label: {
                 Image(systemName: "arrow.right")
@@ -209,23 +213,28 @@ struct ProductCard: View {
                     Spacer()
                     
                     HStack{
-                        Text("$\(product.price).00")
-                            .font(.system(size: 24, weight: .semibold))
-                        
-                        Spacer()
-                        
-                        Button {
-                            cartManager.addToCart(product: product)
-                        } label: {
-                            Image(systemName: "basket")
-                                .imageScale(.large)
-                                .padding()
-                                .frame(width: 90, height: 70)
-                                .background(.black)
-                                .clipShape(Capsule())
-                                .foregroundColor(.white)
+                        if (cartManager.has(product: product)) {
+                            Text("Already in Cart")
+                                .font(.system(size: 24, weight: .semibold))
+                        } else {
+                            Text("$\(product.price).00")
+                                .font(.system(size: 24, weight: .semibold))
+                            
+                            Spacer()
+                            
+                            Button {
+                                cartManager.addToCart(product: product)
+                            } label: {
+                                Image(systemName: "basket")
+                                    .imageScale(.large)
+                                    .padding()
+                                    .frame(width: 90, height: 70)
+                                    .background(.black)
+                                    .clipShape(Capsule())
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.horizontal, -10)
                         }
-                        .padding(.horizontal, -10)
                     }
                     .padding(.leading)
                     .padding()

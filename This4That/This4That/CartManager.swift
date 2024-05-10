@@ -21,4 +21,13 @@ class CartManager: ObservableObject {
         total -= product.price
     }
     
+    func has(product: Product) -> Bool {
+        for prod in products {
+            if (prod.id == product.id) {
+                return true
+            }
+        }
+        return false
+    }
+    
 }

@@ -9,7 +9,8 @@ import SwiftUI
 
 struct CollectionView: View {
     var category: String
-    @EnvironmentObject var cartManager: CartManager
+    //@EnvironmentObject var cartManager: CartManager
+    @StateObject var cartManager: CartManager
     @Environment(\.presentationMode) var mode
     var body: some View {
         NavigationView{
@@ -41,7 +42,7 @@ struct CollectionView: View {
                               content: {
                         ForEach(productList, id: \.id) {item in
                             if (item.category == category) {
-                                SmallProductCard(product: item)
+                                SmallProductCard(product: item, cartManager: cartManager)
                                     .environmentObject(cartManager)
                             }
                         }
@@ -55,14 +56,15 @@ struct CollectionView: View {
 }
 
 #Preview {
-    CollectionView(category: "All")
+    CollectionView(category: "All", cartManager: CartManager())
         .environmentObject(CartManager())
 }
 
 struct SmallProductCard: View {
     var product: Product
     
-    @EnvironmentObject var cartManager: CartManager
+    //@EnvironmentObject var cartManager: CartManager
+    @StateObject var cartManager: CartManager
     
     var body: some View{
         ZStack{
@@ -87,21 +89,26 @@ struct SmallProductCard: View {
                     Spacer()
                     
                     HStack{
-                        Text("$\(product.price).00")
-                            .font(.system(size: 14, weight: .semibold))
-                        
-                        Spacer()
-                        
-                        Button {
-                            cartManager.addToCart(product: product)
-                        } label: {
-                            Image(systemName: "basket")
-                                .imageScale(.large)
-                                .padding()
-                                .frame(width: 45, height: 40)
-                                .background(.black)
-                                .clipShape(Capsule())
-                                .foregroundColor(.white)
+                        if (cartManager.has(product: product)) {
+                            Text("In Cart")
+                                .font(.system(size: 14, weight: .semibold))
+                        } else {
+                            Text("$\(product.price).00")
+                                .font(.system(size: 14, weight: .semibold))
+                            
+                            Spacer()
+                            
+                            Button {
+                                cartManager.addToCart(product: product)
+                            } label: {
+                                Image(systemName: "basket")
+                                    .imageScale(.large)
+                                    .padding()
+                                    .frame(width: 45, height: 40)
+                                    .background(.black)
+                                    .clipShape(Capsule())
+                                    .foregroundColor(.white)
+                            }
                         }
                     }
                     .padding(.trailing, -12)

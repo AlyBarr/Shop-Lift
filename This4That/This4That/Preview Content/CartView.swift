@@ -9,7 +9,8 @@ import SwiftUI
 
 struct CartView: View {
     
-    @EnvironmentObject var cartManager : CartManager
+    //@EnvironmentObject var cartManager : CartManager
+    @StateObject var cartManager : CartManager
     
     @Environment(\.presentationMode) var mode
     
@@ -54,7 +55,7 @@ struct CartView: View {
                     // Cart Products
                     VStack (spacing: 20) {
                         ForEach(cartManager.products, id: \.name) { item in
-                            CartProductCard(product: item)
+                            CartProductCard(product: item, cartManager: cartManager)
                         }
                     }
                     .padding(.horizontal)
@@ -73,7 +74,7 @@ struct CartView: View {
                         Text("Total Amount")
                             .font(.system(size: 24))
                         
-                        Text("USD \(cartManager.total)")
+                        Text("USD \(cartManager.total).00")
                             .font(.system(size: 36, weight: .semibold))
                     }
                     .padding(30)
@@ -103,13 +104,15 @@ struct CartView: View {
 }
 
 #Preview {
-    CartView()
+    CartView(cartManager: CartManager())
+        .environmentObject(CartManager())
 }
 
 // Cart Product View
 struct CartProductCard: View {
     
     var product: Product
+    @StateObject var cartManager : CartManager
     
     var body: some View {
         HStack(alignment: .center, spacing: 20) {
@@ -117,7 +120,7 @@ struct CartProductCard: View {
                 .resizable()
                 .scaledToFit()
                 .padding()
-                .frame(width: 80, height: 80)
+                .frame(width: 65, height: 65)
                 .background(.gray.opacity(0.1))
                 .clipShape(Circle())
             
@@ -132,10 +135,21 @@ struct CartProductCard: View {
             
             Spacer()
             
-            Text("$\(product.price)")
-                .padding()
+            Text("$\(product.price).00")
+                .padding(5)
                 .background(.yellow.opacity(0.5))
                 .clipShape(Capsule())
+        
+            
+            Button() {
+                cartManager.removeFromCart(product: product)
+            } label: {
+                Text("X")
+                    .frame(width: 25, height: 25)
+                    .background(.gray)
+                    .foregroundColor(.black)
+                    .clipShape(Capsule())
+            }
                 
         }
     }
