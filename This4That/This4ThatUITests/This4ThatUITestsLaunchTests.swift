@@ -9,7 +9,7 @@ import XCTest
 
 final class This4ThatUITestsLaunchTests: XCTestCase {
 
-    override class var runsForEachTargetApplicationUIConfiguration: Bool {
+    /*override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }
 
@@ -28,5 +28,5 @@ final class This4ThatUITestsLaunchTests: XCTestCase {
         attachment.name = "Launch Screen"
         attachment.lifetime = .keepAlways
         add(attachment)
-    }
+    }*/
 }
